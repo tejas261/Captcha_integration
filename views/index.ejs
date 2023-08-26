@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script> 
+    <title>Captcha Integration</title>
+    <style>
+        *{
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      font-weight: 400; 
+      color-scheme: light dark;
+    }
+
+    h1 {
+        font-size: 3.2em;
+        line-height: 1.1;
+      }
+
+      button {
+        border-radius: 8px;
+        border: none;
+        padding: 0.6em 1.2em;
+        font-size: 1em;
+        font-weight: 500;
+        font-family: inherit;
+        background-color: #1a1a1a;
+        cursor: pointer;
+        transition: border-color 0.25s;
+        color: #fff;
+      }
+      #page1{
+        display: flex;
+        justify-content:center;
+        align-items: center; 
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+      }
+
+      label{
+        padding: 20px;
+      }
+      
+      input,select{
+        width: 20%;
+        height: 40px;
+        text-align: left;
+      }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Please enter your details</h1><br> 
+    </header>
+    <form>
+        <div id='page1'>
+            <label>First Name</label>
+            <input required type="text" name="firstname" placeholder='Enter First name' />
+            
+            <label>Last Name</label>
+            <input type="text" name="lastname" placeholder='Enter Last name' />
+            
+            <label>Phone</label>
+            <input required type="number" name="phone" placeholder='Enter Phone number'/>
+            
+            <label>Email</label>
+            <input required type="email" name="email" placeholder='Enter Email'/>
+            
+            <label>Gender</label>
+            <select name="gender">
+              <option>Male</option>
+              <option>Female</option>
+              <option>Prefer not to say</option>
+            </select>
+            
+            <label>Date of Birth</label>
+            <input required style="margin-bottom: 10px;" name="date" type="date"/>
+
+            <div class="g-recaptcha" data-sitekey="6LcyrcMnAAAAAGN0Ep2LkbBRsVj4OnnySa8J8Ffm"></div><br>
+
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    <script>
+        let form = document.querySelector('form');
+        form.addEventListener('submit',()=>{
+            let response = grecaptcha.getResponse();
+            if(response.length == 0){
+                alert("Enter captcha");
+            }
+            else{
+                alert("Successful");
+            }
+        })
+    </script>
+
+</body>
+</html>
